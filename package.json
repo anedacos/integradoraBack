@@ -1,0 +1,67 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "APP_ENV=local mocha tests/**/*Test.js --exit",
+    "dev": "APP_ENV=local nodemon index.js",
+    "docs": "node node_modules/.bin/apidoc -f \"^(?!.*node_modules.*$).*\\.js$\" -o apidoc && node_modules/.bin/apidocjs-markdown -p apidoc -o APIDOC.md",
+    "start": "APP_ENV=local nodemon index.js",
+    "start-worker": "APP_ENV=local nodemon worker.js",
+    "test:debug": "APP_ENV=local mocha --inspect-brk tests/**/*Test.js",
+    "dev:debug": "APP_ENV=local nodemon --inspect=:9228 index.js",
+    "eslint": "eslint . --fix",
+    "lint": "eslint app test",
+    "lint:app": "eslint app",
+    "lint:test": "eslint test",
+    "commit": "git-cz"
+  },
+  "dependencies": {
+    "commitizen": "^4.2.2",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "express": "~4.16.1",
+    "git-cz": "^4.7.1",
+    "google-auth-library": "^6.1.3",
+    "googleapis": "^64.0.0",
+    "http-errors": "~1.6.3",
+    "husky": "^4.2.5",
+    "jade": "~1.11.0",
+    "jsonwebtoken": "^8.5.1",
+    "log4js": "^6.3.0",
+    "mocha": "^8.2.1",
+    "mongoose": "^5.10.14",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.6",
+    "oauth2-server": "^3.1.1",
+    "prettier": "^2.1.2",
+    "pretty-quick": "^3.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.2.1",
+    "husky": "^4.2.5",
+    "nodemon": "^2.0.3",
+    "pino-pretty": "^3.5.0",
+    "prettier": "^1.19.1",
+    "pretty-quick": "^3.0.0",
+    "commitizen": "^4.2.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  }
+}
